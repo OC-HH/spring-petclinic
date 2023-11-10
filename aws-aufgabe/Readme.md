@@ -24,7 +24,7 @@ Run the Petclinic application in the AWS cloud.
 
 To view the app locally, run the following command from the project root:
 
-```
+```bash
 # under Linux
 ./gradlew bootRun
 
@@ -46,7 +46,7 @@ You can then access the app at http://localhost:8080/. It looks something like t
 
 To build the application, run
 
-```
+```bash
 # under Linux
 ./gradlew build
 
