@@ -64,10 +64,12 @@ Rename the file to `app.jar`, since it is easier to remember.
 * To run the bootstrap script on startup use EC2 UserData: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/user-data.html
 * The bootstrap script should 1) install Java (Corretto 17), 2) Download the App-Jar from your S3 bucket, 3) Run the App-Jar with java
 * Use this shell command to install Java 17 on AWS Linux: `sudo dnf install java-17-amazon-corretto`
-* You can test your script in EC2 if you ssh into the EC2 instance `ssh -i <keypair>.pem ec2-user@<public-ip>`
+* Use `aws s3 cp s3://<bucket-name>/app.jar .` to download the jar (the last dot is important!). See also: https://docs.aws.amazon.com/cli/latest/reference/s3/cp.html
+* Start the app with `java -jar app.jar`
+* You can test your script in EC2 if you ssh into the EC2 instance `ssh -i <keypair>.pem ec2-user@<public-ip>`, or via EC2 Instance Connect from the Web Console.
+* To check your script execution you can check the log file `/var/log/cloud-init-output.log` on the EC2 instance. Any output or execution errors from your script will be in this log file.
+* The script is only executed after the first instance start, not when you stop and restart your instance. If the script has an error you will have to create a new instance. Terminate old instances to save money.
 * For the EC2 instance to download the jar from S3, it needs an IAM Role with S3 Permissions
 * Make sure to select the correct VPC and subnet when creating the EC2 instance, also enable Auto-assign public IP
 * To access S3 you can use the aws-cli in the bootstrap script, it is already installed on the AWS AMI
-* Use `aws s3 cp s3://<bucket-name>/app.jar .` to download the jar (the last dot is important!). See also: https://docs.aws.amazon.com/cli/latest/reference/s3/cp.html
-* Start the app with `java -jar app.jar`
 * If everything works you should be able to access the app via a browser at `http://<public-ip>:8080/`
