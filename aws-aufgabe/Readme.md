@@ -59,8 +59,10 @@ Rename the file to `app.jar`, since it is easier to remember.
 * You can use the VPC Wizard to create an VPC (Service VPC, Create VPC)
 * For VPC choose: Number of availability zones=1, Number of public subnets=1, Number of private subnets=0, VPC Endpoints=none, VPC CIDR=10.0.0.0/16, Subnet CIDR=10.0.0.0/24
 * The S3 Bucket name must be globally unique. Use oc-buddies- as prefix.
-* For the EC2 Instance please use the `Amazon Linux 2023 AMI` and Instance Type `t2.micro` (both are the default options)
+* For the EC2 Instance please use the `Amazon Linux 2023 AMI` and Instance Type `t2.micro` (both are the default options).
+* Make sure to create the EC2 instance with a public IP address (check network settings / auto-assign public IP).
 * Since the app is running on port 8080, the EC2 Instance needs to have a SecurityGroup attached which allows port 8080 from 0.0.0.0/0 as inbound rule
+* Also allow ssh access via port 22 to the EC2 instance, when you want to connect to it to debug it.
 * To run the bootstrap script on startup use EC2 UserData: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/user-data.html
 * The bootstrap script should 1) install Java (Corretto 17), 2) Download the App-Jar from your S3 bucket, 3) Run the App-Jar with java
 * Use this shell command to install Java 17 on AWS Linux: `sudo dnf install java-17-amazon-corretto`
