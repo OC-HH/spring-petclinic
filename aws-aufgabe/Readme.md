@@ -25,7 +25,11 @@ Run the Petclinic application in the AWS cloud.
 To view the app locally, run the following command from the project root:
 
 ```
+# under Linux
 ./gradlew bootRun
+
+# under Windows
+gradlew bootRun
 ```
 
 You should see an output like
@@ -43,7 +47,11 @@ You can then access the app at http://localhost:8080/. It looks something like t
 To build the application, run
 
 ```
+# under Linux
 ./gradlew build
+
+# under Windows
+gradlew build
 ```
 
 You will find the application under `build/libs` named `spring-petclinic-3.1.0.jar`.
